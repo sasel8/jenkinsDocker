@@ -6,6 +6,18 @@ pipeline {
         CONTAINER_NAME = 'melekgezer-container'
         PORT_MAPPING = '80:4444'
     }
+    stages {
+
+        stage('Cleanup') {
+            steps {
+                script {
+                    bat "docker stop ${env.CONTAINER_NAME} || exit 0"
+                    bat "docker rm ${env.CONTAINER_NAME} || exit 0"
+
+                    bat "docker rmi ${env.DOCKER_IMAGE} || exit 0"
+                }
+            }
+        }
 
     stages {
         stage('Build Docker Image') {
@@ -15,6 +27,7 @@ pipeline {
                 }
             }
         }
+        
         
         stage('Run Docker Container') {
             steps {
