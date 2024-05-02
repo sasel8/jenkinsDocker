@@ -4,8 +4,9 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'melekgezer-html-server'
         CONTAINER_NAME = 'melekgezer-container'
-        PORT_MAPPING = '80:4444'
+        PORT_MAPPING = '4444:80'
     }
+
     stages {
 
         stage('Cleanup') {
@@ -18,12 +19,24 @@ pipeline {
                 }
             }
         }
-
-    stages {
+        
         stage('Build Docker Image') {
             steps {
                 script {
                     docker.build(env.DOCKER_IMAGE)
+                }
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    docker.image(env.DOCKER_IMAGE).run("-d --name ${env.CONTAINER_NAME} -p ${env.PORT_MAPPING}")
+                }
+            }
+        }
+    }
+} docker.build(env.DOCKER_IMAGE)
                 }
             }
         }
