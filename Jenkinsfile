@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'nginx'
+        DOCKER_IMAGE = 'nginx-html-server'
         CONTAINER_NAME = 'dev_ngir-container'
         PORT_MAPPING = '4444:80'
     }
