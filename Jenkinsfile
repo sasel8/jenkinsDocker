@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'suedaasel-html-server'
-        CONTAINER_NAME = 'suedaasel-container'
+        DOCKER_IMAGE = 'nginx'
+        CONTAINER_NAME = 'dev_ngir-container'
         PORT_MAPPING = '4444:80'
     }
 
